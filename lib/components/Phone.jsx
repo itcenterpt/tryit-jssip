@@ -425,7 +425,7 @@ export default class Phone extends React.Component
 
 		const session = this.state.incomingSession;
 
-		session.terminate();
+		session.terminate({"status_code": 603, "reason_phrase": "Declined"});
 	}
 }
 

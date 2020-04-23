@@ -295,14 +295,14 @@ export default class Session extends React.Component
 	{
 		logger.debug('handleHold()');
 
-		this.props.session.hold({ useUpdate: true });
+		this.props.session.hold({ useUpdate: false });
 	}
 
 	handleResume()
 	{
 		logger.debug('handleResume()');
 
-		this.props.session.unhold({ useUpdate: true });
+		this.props.session.unhold({ useUpdate: false });
 	}
 
 	_handleRemoteStream(stream)
