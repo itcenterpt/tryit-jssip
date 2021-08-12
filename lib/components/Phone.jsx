@@ -143,7 +143,8 @@ export default class Phone extends React.Component
 					'authorization_user'  : settings.authorization_user,
 					'instance_id'         : settings.instance_id,
 					'session_timers'      : settings.session_timers,
-					'use_preloaded_route' : settings.use_preloaded_route
+					'use_preloaded_route' : settings.use_preloaded_route,
+					'session_timers_refresh_method': 'invite'
 				});
 
 			// TODO: For testing.
@@ -358,6 +359,9 @@ export default class Phone extends React.Component
 		const session = this._ua.call(uri,
 			{
 				pcConfig         : this.props.settings.pcConfig || { iceServers: [] },
+				'extraHeaders': [
+					'X-VOICIS-PANI-Extension: ABCCS_DESKTOP'
+				],
 				mediaConstraints :
 				{
 					audio : true,
@@ -367,7 +371,9 @@ export default class Phone extends React.Component
 				{
 					offerToReceiveAudio : 1,
 					offerToReceiveVideo : 1
-				}
+				},
+				sessionTimersExpires: 1800,
+				iceGatheringTimeout: 1000
 			});
 
 		session.on('connecting', () =>
